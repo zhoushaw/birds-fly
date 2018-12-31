@@ -1,8 +1,8 @@
 class SceneController {
-    private _stage: egret.DisplayObjectContainer // 场景容器
+    public _stage: egret.DisplayObjectContainer // 场景容器
 
     private startScene: StartScene // 开始场景
-    // private playScene: PlayScene // 游戏场景
+    private playScene: PlayScene // 游戏场景
     // private endScene: EndScene // 结束场景
 
     public static sceneController: SceneController
@@ -16,7 +16,7 @@ class SceneController {
 
     public constructor() {
         this.startScene = new StartScene()
-        // this.playScene = new PlayScene()
+        this.playScene = new PlayScene()
         // this.endScene = new EndScene()
     }
 
@@ -43,26 +43,27 @@ class SceneController {
         //     this.instance.endScene = new EndScene()
         // }
         // 添加开始场景
-        stage.addChild(this.instance.startScene)
+        stage.addChild(this.instance.startScene);
     }
 
     /**
      * 显示游戏场景
      */
     public static showPlayScene() {
-        // let stage: egret.DisplayObjectContainer = this.instance._stage
-        // if (this.instance.startScene.parent) {
-        //     stage.removeChild(this.instance.startScene)
-        //     this.instance.startScene = new StartScene()
-        // }
+        let stage: egret.DisplayObjectContainer = this.instance._stage
+        if (this.instance.startScene.parent) {
+            stage.removeChild(this.instance.startScene)
+            this.instance.startScene = new StartScene()
+        }
         // if (this.instance.endScene.parent) {
         //     stage.removeChild(this.instance.endScene)
         //     this.instance.endScene = new EndScene()
         // }
-        // if (this.instance.playScene.parent) {
-        //     stage.removeChild(this.instance.playScene)
-        //     this.instance.playScene = new PlayScene()
-        // }
+        console.log(this.instance)
+        if (this.instance.playScene.parent) {
+            stage.removeChild(this.instance.playScene)
+            this.instance.playScene = new PlayScene()
+        }
         // let level = n.GameData.level
         // if (level >= n.GameData.levelData.length) { // 关卡超过已有的，那就直接用最后一关（也就是到了后面难度都是几乎一样的），避免数组越界
         //     level = n.GameData.levelData.length - 1
@@ -74,7 +75,7 @@ class SceneController {
         // // 重置游戏步数为0
         // n.GameData.step = 0
         // n.GameData.overType = OverType.NULL
-        // stage.addChild(this.instance.playScene)
+        stage.addChild(this.instance.playScene)
     }
 
     /**

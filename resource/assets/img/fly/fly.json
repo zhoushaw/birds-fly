@@ -1,0 +1,46 @@
+{
+    "mc": {
+        "run": {
+            "frameRate": 24,
+            "events": [
+                {
+                    "name": "@fly",
+                    "frame": 3
+                }
+            ],
+            "labels": [
+                {
+                    "name": "start",
+                    "end": 9,
+                    "frame": 1
+                }
+            ],
+            "frames": [
+                {
+                    "res": "red-middle",
+                    "x":0,
+                    "y":0,
+                    "duration": 3
+                },
+                {
+                    "res": "red-down",
+                    "x":0,
+                    "y":0,
+                    "duration": 3
+                },
+                {
+                    "res": "red-up",
+                    "x":0,
+                    "y":0,
+                    "duration": 3
+                }
+            ]
+        }
+    },
+    "file": "s2.png",
+    "res": {
+        "red-middle":{"x":216,"y":176,"w":34,"h":24,"offX":0,"offY":0,"sourceW":34,"sourceH":24},
+        "red-up":{"x":216,"y":150,"w":34,"h":24,"offX":0,"offY":0,"sourceW":34,"sourceH":24},
+        "red-down":{"x":216,"y":202,"w":34,"h":24,"offX":0,"offY":0,"sourceW":34,"sourceH":24}
+    }
+}

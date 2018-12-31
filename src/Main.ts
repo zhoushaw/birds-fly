@@ -47,6 +47,18 @@ class Main extends egret.DisplayObjectContainer {
         }
     }
 
+    private initBaseBg ():egret.Bitmap {
+        let rdNum = Math.floor(Math.random() * 2 + 1);
+        let bg: egret.Bitmap = GameUtil.createBitmapByName(`bg${rdNum}`, 'jpg');
+        // 因为使用了fixedWide模式，自己根据舞台宽高，重新设置背景图片大小（会被裁剪）
+        bg.width = GameUtil.getStageWidth();
+        bg.height = 900;
+
+        bg.x = 0;
+        bg.y = 0;
+        return bg;
+    }
+
     /**
      * 创建场景界面
      * Create scene interface
@@ -55,20 +67,12 @@ class Main extends egret.DisplayObjectContainer {
         let container: egret.DisplayObjectContainer = new egret.DisplayObjectContainer()
         this.addChild(container)
 
-        let bg: egret.Bitmap = GameUtil.createBitmapByName('bg1', 'jpg');
+        let bg: egret.Bitmap = this.initBaseBg();
         container.addChild(bg)
-        // 因为使用了fixedWide模式，自己根据舞台宽高，重新设置背景图片大小（会被裁剪）
-        let ratioW = GameUtil.getStageWidth() / bg.width
-        let ratioH = GameUtil.getStageHeight() / bg.height
-        let ratio = bg.width / bg.height
-        if (ratioW > ratioH) {
-            bg.width = GameUtil.getStageWidth()
-            bg.height = bg.width / ratio
-        } else {
-            bg.height = GameUtil.getStageHeight()
-            bg.width = bg.height * ratio
-        }
-        bg.x = (GameUtil.getStageWidth() - bg.width) / 2
+
+        let baseRoad = new BottomRoad(container);
+        baseRoad.startRun();
+
 
         SceneController.instance.setStage(container)
         SceneController.initGame()

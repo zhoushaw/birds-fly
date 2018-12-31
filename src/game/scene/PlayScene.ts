@@ -1,121 +1,50 @@
-// declare interface PlayListener {
-//     /**
-//      * 返回能否走
-//      */
-//     canRun(): boolean
-//     /**
-//      * 玩家走完
-//      */
-//     playerRun(nextStep: Point): void
-//     /**
-//      * 猫走完
-//      */
-//     catRun(searchResult: SearchResult): void
-//     /**
-//      * 哪个赢，
-//      * 0：玩家
-//      * 1：猫
-//      */
-//     gameOver(type: number): void
-// }
+class PlayScene extends BaseScene {
 
-// enum OverType {
-//     NULL = -1, // 无
-//     PLAYER = 0, // 玩家赢
-//     CAT = 1 // 猫赢
-// }
+    protected initView() {
 
-// class PlayScene extends BaseScene implements PlayListener {
-//     // 猫
-//     private cat: Cat
-//     private catRunning: boolean
-//     private sound: egret.Sound
+        this.initGuideBitMap();
+        this.initOperation();
+    }
 
-//     protected initView() {
-//         this.sound = RES.getRes('go_mp3')
-//         this.catRunning = false
-//         this.createGridNode()
-//         this.createBarrier(n.GameData.barrierNumber)
-//         this.createCat()
-//         this.x = (GameUtil.getStageWidth() - this.width) / 2
-//         this.y = GameUtil.getStageHeight() / 2.5
+    private initGuideBitMap () {
+        // getready图片
+        let getReady:egret.Bitmap = GameUtil.createTextureByName( "s1_json#get-ready" );
+        this.addChild(getReady)
+        
+        getReady.width = 320;
+        getReady.height = 90;
+        getReady.x = (GameUtil.getStageWidth() - getReady.width) / 2;
+        getReady.y = 235;
 
-//         SceneController.showLevelTip()
-//     }
 
-//     private createGridNode() {
-//         n.GameData.gridNodeList = new Array<Array<any>>(n.GameData.row)
-//         // 根据屏幕宽度和定义的列数和格子边距计算格子的代销
-//         let gridNodeSize = GameUtil.getStageWidth() / (n.GameData.row + 1) - n.GameData.gridMargin
-//         for(let i = 0;i < n.GameData.row;++i) {
-//             n.GameData.gridNodeList[i] = new Array<GridNode>(n.GameData.col)
-//             let indent = (i % 2) * (gridNodeSize / 2) // 偶数行缩进
-//             for(let j = 0;j < n.GameData.col;++j) {
-//                 // i，j在数组中的下标，x，y为在舞台上的坐标
-//                 let x = indent + j * (gridNodeSize + n.GameData.gridMargin)
-//                 let y = i * gridNodeSize
-//                 n.GameData.gridNodeList[i][j] = new GridNode(new Point(i, j), new Point(x, y), gridNodeSize, this)
-//                 // 都初始化为有效状态
-//                 n.GameData.gridNodeList[i][j].setStatus(GridNodeStatus.AVAILABLE)
-//                 // 添加到游戏场景中
-//                 this.addChild(n.GameData.gridNodeList[i][j])
-//             }
-//         }
-//     }
+        let descript:egret.Bitmap = GameUtil.createTextureByName( "s1_json#guide" );
+        this.addChild(descript)
+        
+        descript.width = 160;
+        descript.height = 130;
+        descript.x = (GameUtil.getStageWidth() - descript.width) / 2;
+        descript.y = 555;
+    }
 
-//     private createBarrier(num: number) {
-//         while(num) {
-//             let i = Math.floor(Math.random() * 100 % n.GameData.row)
-//             let j = Math.floor(Math.random() * 100 % n.GameData.col)
-//             let gridNode = n.GameData.gridNodeList[i][j]
-//             if (i !== Math.floor(n.GameData.row / 2) && j !== Math.floor(n.GameData.col / 2) && gridNode.getStatus() === GridNodeStatus.AVAILABLE) {
-//                 gridNode.setStatus(GridNodeStatus.UNAVAILABLE)
-//                 num--
-//             }
-//         }
-//     }
+    private initOperation () {
 
-//     private createCat() {
-//         let i = Math.floor(n.GameData.row / 2)
-//         let j = Math.floor(n.GameData.col / 2)
-//         this.cat = new Cat(this)
-//         this.addChild(this.cat)
-//         this.cat.move(new Point(i, j))
-//     }
 
-//     public playerRun(index: Point) {
-//         this.sound.play(0, 1)
-//         n.GameData.step++
-//         this.catRunning = true
-//         this.cat.run()
-//     }
+        let data = RES.getRes("fly_json");
+        let txtr: egret.Texture = RES.getRes("s2_png");
 
-//     public catRun(searchResult: SearchResult) {
-//         if (!searchResult.hasPath) {
-//             // 被包围了，切换状态
-//             this.cat.setStatus(CatStatus.UNAVAILABLE)
-//         }
-//         let nextStep = searchResult.nextStep
-//         // 下一步和当前所在位置一样，说明无路可走，玩家赢
-//         if (nextStep.equal(this.cat.getIndex())) {
-//              this.gameOver(OverType.PLAYER)
-//              return
-//         }
-//         this.cat.move(nextStep)
-//         // 猫到达边界，猫赢
-//         if (nextStep.x * nextStep.y === 0 || nextStep.x === n.GameData.row - 1 || nextStep.y === n.GameData.col - 1) {
-//             this.gameOver(OverType.CAT)
-//             return
-//         }
-//         this.catRunning = false
-//     }
+        let mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
+        let mc1:egret.MovieClip = new egret.MovieClip( mcFactory.generateMovieClipData( "run" ) );
+        this.addChild( mc1 );
+        
+        mc1.scaleX = 2;
+        mc1.scaleY = 2;
+        mc1.y = 600;
+        mc1.x = 143;
 
-//     public canRun() {
-//         return !this.catRunning
-//     }
+        mc1.gotoAndPlay( "start" , -1);
 
-//     public gameOver(type: OverType) {
-//         n.GameData.overType = type
-//         SceneController.showEndScene()
-//     }
-// }
+
+        let mc1Tw = egret.Tween.get( mc1, {loop: true});
+        mc1Tw.to( {y: 620}, 300 ).to({y: 600}, 300);
+    }
+}

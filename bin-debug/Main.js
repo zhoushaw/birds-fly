@@ -105,6 +105,16 @@ var Main = (function (_super) {
             });
         });
     };
+    Main.prototype.initBaseBg = function () {
+        var rdNum = Math.floor(Math.random() * 2 + 1);
+        var bg = GameUtil.createBitmapByName("bg" + rdNum, 'jpg');
+        // 因为使用了fixedWide模式，自己根据舞台宽高，重新设置背景图片大小（会被裁剪）
+        bg.width = GameUtil.getStageWidth();
+        bg.height = 900;
+        bg.x = 0;
+        bg.y = 0;
+        return bg;
+    };
     /**
      * 创建场景界面
      * Create scene interface
@@ -112,25 +122,13 @@ var Main = (function (_super) {
     Main.prototype.createGameScene = function () {
         var container = new egret.DisplayObjectContainer();
         this.addChild(container);
-        var bg = GameUtil.createBitmapByName('bg1', 'jpg');
+        var bg = this.initBaseBg();
         container.addChild(bg);
-        // 因为使用了fixedWide模式，自己根据舞台宽高，重新设置背景图片大小（会被裁剪）
-        var ratioW = GameUtil.getStageWidth() / bg.width;
-        var ratioH = GameUtil.getStageHeight() / bg.height;
-        var ratio = bg.width / bg.height;
-        if (ratioW > ratioH) {
-            bg.width = GameUtil.getStageWidth();
-            bg.height = bg.width / ratio;
-        }
-        else {
-            bg.height = GameUtil.getStageHeight();
-            bg.width = bg.height * ratio;
-        }
-        bg.x = (GameUtil.getStageWidth() - bg.width) / 2;
+        var baseRoad = new BottomRoad(container);
+        baseRoad.startRun();
         SceneController.instance.setStage(container);
         SceneController.initGame();
     };
     return Main;
 }(egret.DisplayObjectContainer));
 __reflect(Main.prototype, "Main");
-//# sourceMappingURL=Main.js.map

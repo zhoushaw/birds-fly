@@ -41,4 +41,27 @@ class GameUtil {
         return new egret.MovieClip(mcFactory_stay.generateMovieClipData(name))
     }
 
+    /**
+     * 获取精灵图，图片Bitmap
+     */
+    public static createTextureByName(name: string) {
+
+
+        let Texture:egret.Texture = RES.getRes( name );
+        var result:egret.Bitmap = new egret.Bitmap( Texture );
+
+        return result;
+    }
+
+
+    /**
+     * 绑定点击事件
+     */
+    public static bitmapToBtn(bitmap: egret.Bitmap, callback) {
+            bitmap.touchEnabled = true
+            bitmap.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=> {
+                // 这个事件发生才算是点击按钮
+                callback && callback()
+            }, this)
+    }
 }

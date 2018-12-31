@@ -4,7 +4,7 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var SceneController = (function () {
     function SceneController() {
         this.startScene = new StartScene();
-        // this.playScene = new PlayScene()
+        this.playScene = new PlayScene();
         // this.endScene = new EndScene()
     }
     Object.defineProperty(SceneController, "instance", {
@@ -45,19 +45,20 @@ var SceneController = (function () {
      * 显示游戏场景
      */
     SceneController.showPlayScene = function () {
-        // let stage: egret.DisplayObjectContainer = this.instance._stage
-        // if (this.instance.startScene.parent) {
-        //     stage.removeChild(this.instance.startScene)
-        //     this.instance.startScene = new StartScene()
-        // }
+        var stage = this.instance._stage;
+        if (this.instance.startScene.parent) {
+            stage.removeChild(this.instance.startScene);
+            this.instance.startScene = new StartScene();
+        }
         // if (this.instance.endScene.parent) {
         //     stage.removeChild(this.instance.endScene)
         //     this.instance.endScene = new EndScene()
         // }
-        // if (this.instance.playScene.parent) {
-        //     stage.removeChild(this.instance.playScene)
-        //     this.instance.playScene = new PlayScene()
-        // }
+        console.log(this.instance);
+        if (this.instance.playScene.parent) {
+            stage.removeChild(this.instance.playScene);
+            this.instance.playScene = new PlayScene();
+        }
         // let level = n.GameData.level
         // if (level >= n.GameData.levelData.length) { // 关卡超过已有的，那就直接用最后一关（也就是到了后面难度都是几乎一样的），避免数组越界
         //     level = n.GameData.levelData.length - 1
@@ -69,7 +70,7 @@ var SceneController = (function () {
         // // 重置游戏步数为0
         // n.GameData.step = 0
         // n.GameData.overType = OverType.NULL
-        // stage.addChild(this.instance.playScene)
+        stage.addChild(this.instance.playScene);
     };
     /**
      * 开始游戏时显示关卡
@@ -128,4 +129,3 @@ var SceneController = (function () {
     return SceneController;
 }());
 __reflect(SceneController.prototype, "SceneController");
-//# sourceMappingURL=SceneController.js.map

@@ -39,7 +39,24 @@ var GameUtil = (function () {
         var mcFactory_stay = new egret.MovieClipDataFactory(data_stay, texture_stay);
         return new egret.MovieClip(mcFactory_stay.generateMovieClipData(name));
     };
+    /**
+     * 获取精灵图，图片Bitmap
+     */
+    GameUtil.createTextureByName = function (name) {
+        var Texture = RES.getRes(name);
+        var result = new egret.Bitmap(Texture);
+        return result;
+    };
+    /**
+     * 绑定点击事件
+     */
+    GameUtil.bitmapToBtn = function (bitmap, callback) {
+        bitmap.touchEnabled = true;
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            // 这个事件发生才算是点击按钮
+            callback && callback();
+        }, this);
+    };
     return GameUtil;
 }());
 __reflect(GameUtil.prototype, "GameUtil");
-//# sourceMappingURL=GameUtil.js.map
