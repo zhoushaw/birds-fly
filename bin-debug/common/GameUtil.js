@@ -57,6 +57,17 @@ var GameUtil = (function () {
             callback && callback();
         }, this);
     };
+    /**
+     * 根据传入宽度计算居中位置
+     */
+    GameUtil.calcMdPoz = function (bitmapWd) {
+        return (GameUtil.getStageWidth() - bitmapWd) / 2;
+    };
+    /**
+     * 创建eui, image
+     */
+    GameUtil.prototype.createEuiImg = function () {
+    };
     return GameUtil;
 }());
 __reflect(GameUtil.prototype, "GameUtil");

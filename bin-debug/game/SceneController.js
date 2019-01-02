@@ -39,7 +39,8 @@ var SceneController = (function () {
         //     this.instance.endScene = new EndScene()
         // }
         // 添加开始场景
-        stage.addChild(this.instance.startScene);
+        stage.addChild(this.instance.playScene);
+        // stage.addChild(this.instance.playScene);
     };
     /**
      * 显示游戏场景

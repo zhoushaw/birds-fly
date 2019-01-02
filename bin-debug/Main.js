@@ -48,6 +48,10 @@ var Main = (function (_super) {
     function Main() {
         var _this = _super.call(this) || this;
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
+        //注入自定义的素材解析器
+        var assetAdapter = new AssetAdapter();
+        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
+        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
         return _this;
     }
     Main.prototype.onAddToStage = function (event) {
@@ -122,10 +126,10 @@ var Main = (function (_super) {
     Main.prototype.createGameScene = function () {
         var container = new egret.DisplayObjectContainer();
         this.addChild(container);
-        var bg = this.initBaseBg();
-        container.addChild(bg);
-        var baseRoad = new BottomRoad(container);
-        baseRoad.startRun();
+        // let bg: egret.Bitmap = this.initBaseBg();
+        // container.addChild(bg)
+        BottomRoad.instance.setStage(container);
+        BottomRoad.instance.onAddToStage();
         SceneController.instance.setStage(container);
         SceneController.initGame();
     };

@@ -1,0 +1,19 @@
+{
+  "global": {
+    "globalAdsorbEnable": false,
+    "globalBindingDataTestObj": []
+  },
+  "168080b7a2d": {
+    "backgroundX": 0,
+    "backgroundY": 0,
+    "backgroundWidth": -1,
+    "backgroundHeight": -1,
+    "useBgImage": true,
+    "useBgColor": true,
+    "backgroundAlpha": 100,
+    "backgroundType": "null",
+    "backgroundImage": "/Users/shawzhou/Desktop/learning/birds-fly/resource/assets/bg1.jpg",
+    "guideLinesEnabled": true,
+    "bindingDataTestObj": []
+  }
+}

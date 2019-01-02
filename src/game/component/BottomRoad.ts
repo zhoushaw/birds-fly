@@ -1,16 +1,32 @@
-class BottomRoad{
+class BottomRoad extends egret.DisplayObjectContainer{
 
     private _stage: egret.DisplayObjectContainer // 开始场景
     private BottomRoadTw: egret.Tween
     public BottomRoad: egret.Bitmap
-    
+    public static bottomRoad: BottomRoad // 实例对象
 
-    public constructor (container: egret.DisplayObjectContainer) {
-        this._stage = container
-        this.onAddToStage();
+
+    public static get instance() {
+        if (!this.bottomRoad) {
+            this.bottomRoad = new BottomRoad()
+        }
+        return this.bottomRoad
     }
 
-    private onAddToStage() {
+    public constructor () {
+        super();
+        // this._stage = container
+        // this.onAddToStage();
+    }
+
+    /**
+     * 设置存放游戏场景的容器
+     */
+    public setStage(stage: egret.DisplayObjectContainer) {
+        this._stage = stage
+    }
+
+    public onAddToStage() {
         let s1Bbottombg:egret.Texture = RES.getRes( "s1_json#bottom-road" );
         var BottomRoad:egret.Bitmap = new egret.Bitmap( s1Bbottombg );
 
@@ -25,10 +41,10 @@ class BottomRoad{
     public startRun () {
         let x = 0;
         this.BottomRoadTw = egret.Tween.get( this.BottomRoad, {loop: true});
-        this.BottomRoadTw.to( {x: -GameUtil.getStageWidth()}, 3000 );
+        this.BottomRoadTw.to( {x: -GameUtil.getStageWidth()}, 4000 );
     }
 
     public stopRun () {
-       this.BottomRoadTw.pause();
+        this.BottomRoadTw.setPaused(true);
     }
 }

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,bg1_jpg,bg2_jpg,icon_png,number1_png,number2_png,s1_json,fly_json,s1_png,s2_json",
+			"keys": "description_json,bg1_jpg,bg2_jpg,icon_png,s1_png,egret_icon_png,s2_json,s1_json,s2_png,fly_json",
 			"name": "preload"
 		}
 	],
@@ -27,22 +27,6 @@
 			"name": "icon_png"
 		},
 		{
-			"url": "assets/img/number1.png",
-			"type": "image",
-			"name": "number1_png"
-		},
-		{
-			"url": "assets/img/number2.png",
-			"type": "image",
-			"name": "number2_png"
-		},
-		{
-			"url": "assets/img/s1/s1.json",
-			"type": "sheet",
-			"name": "s1_json",
-			"subkeys": "(c),add-symbol,big-0,big-2,big-3,big-4,big-5,big-6,big-7,big-8,big-9,black-color,bottom-road,get-ready,guide,menu,more,ok,s10,s11,s12,s13,s14,s15,s16,small-4,small-7,small-8,small-9,small5,small6,start,text-game,text-over,text-rate,whiite,xiaoniao"
-		},
-		{
 			"url": "assets/img/s1/s1.png",
 			"type": "image",
 			"name": "s1_png"
@@ -53,15 +37,31 @@
 			"name": "s2_png"
 		},
 		{
+			"url": "assets/egret_icon.png",
+			"type": "image",
+			"name": "egret_icon_png"
+		},
+		{
+			"url": "assets/img/s2/s2.json",
+			"type": "sheet",
+			"name": "s2_json",
+			"subkeys": "big-0,big-1,big-2,big-3,big-close,bigger-1,blue-down,blue-middle,blue-up,gold-medal,gold-medal2,medal,new,pause,pipeline-coppery-down,pipeline-coppery-up,pipeline-green-down,pipeline-green-up,red-down,red-middle,red-up,silver-medal,silver-medal2,small-0,small-1,small-2,small-3,small-4,small-5,small-6,small-7,small-8,small-9,small-close,yellow-down,yellow-middle,yellow-up"
+		},
+		{
 			"url": "assets/img/fly/fly.json",
 			"type": "json",
 			"name": "fly_json"
 		},
 		{
-			"name": "s2_json",
+			"url": "assets/img/s1/s1.json",
 			"type": "sheet",
-			"url": "assets/img/s2/s2.json",
-			"subkeys": "medal,pipeline-green-up,pipeline-green-down,pipeline-coppery-up,pipeline-coppery-down,silver-medal,silver-medal2,gold-medal,gold-medal2,blue-down,red-up,red-middle,red-down,blue-middle,blue-up,yellow-down,yellow-middle,yellow-up,pause,bigger-1,new,big-0,big-2,big-3,big-1,small-8,small-9,small-0,small-4,small-5,small-2,small-6,small-7,small-3,big-close,small-1,small-close"
+			"name": "s1_json",
+			"subkeys": "(c),add-symbol,big-0,big-2,big-3,big-4,big-5,big-6,big-7,big-8,big-9,black-color,bottom-road,get-ready,guide,menu,more,ok,s10,s11,s12,s13,s14,s15,s16,small-4,small-7,small-8,small-9,small5,small6,start,text-game,text-over,text-rate,whiite,xiaoniao"
+		},
+		{
+			"url": "assets/img/number1.png",
+			"type": "image",
+			"name": "number13_png"
 		}
 	]
 }

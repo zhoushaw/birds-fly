@@ -3,6 +3,11 @@ class Main extends egret.DisplayObjectContainer {
     public constructor() {
         super()
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
+
+        //注入自定义的素材解析器
+        let assetAdapter = new AssetAdapter();
+        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
+        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
     }
 
     private onAddToStage(event: egret.Event) {
@@ -67,12 +72,11 @@ class Main extends egret.DisplayObjectContainer {
         let container: egret.DisplayObjectContainer = new egret.DisplayObjectContainer()
         this.addChild(container)
 
-        let bg: egret.Bitmap = this.initBaseBg();
-        container.addChild(bg)
+        // let bg: egret.Bitmap = this.initBaseBg();
+        // container.addChild(bg)
 
-        let baseRoad = new BottomRoad(container);
-        baseRoad.startRun();
-
+        BottomRoad.instance.setStage(container);
+        BottomRoad.instance.onAddToStage();
 
         SceneController.instance.setStage(container)
         SceneController.initGame()

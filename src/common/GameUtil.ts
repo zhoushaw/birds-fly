@@ -57,11 +57,28 @@ class GameUtil {
     /**
      * 绑定点击事件
      */
-    public static bitmapToBtn(bitmap: egret.Bitmap, callback) {
+    public static bitmapToBtn(bitmap: any, callback) {
             bitmap.touchEnabled = true
             bitmap.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=> {
                 // 这个事件发生才算是点击按钮
                 callback && callback()
             }, this)
     }
+
+    /**
+     * 根据传入宽度计算居中位置
+     */
+    public static calcMdPoz (bitmapWd: number) {
+        return (GameUtil.getStageWidth() - bitmapWd) / 2;
+    }
+
+
+
+    /**
+     * 创建eui, image
+     */
+    public createEuiImg () {
+        
+    }
+
 }
